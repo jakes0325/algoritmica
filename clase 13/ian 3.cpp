@@ -1,8 +1,8 @@
 /* EJERCICIO 3 - C13
-Crear un proceso que permita ingresar las calificaciones de la carrera de ing. En inform·tica para
-el periodo lectivo 2022. Donde, cada registro de calificaciÛn debe contar con los siguientes datos:
-- Cedula del Alumno, Nombre, Apellido, Curso, Materia, CalificaciÛn
-La aplicaciÛn debe permitir realizar las operaciones b·sicas: Insertar, Modificar, Eliminar
+Crear un proceso que permita ingresar las calificaciones de la carrera de ing. En inform√°tica para
+el periodo lectivo 2022. Donde, cada registro de calificaci√≥n debe contar con los siguientes datos:
+- Cedula del Alumno, Nombre, Apellido, Curso, Materia, Calificaci√≥n
+La aplicaci√≥n debe permitir realizar las operaciones b√°sicas: Insertar, Modificar, Eliminar
 registros y realizar las siguientes consultas:
 	- Mostrar los registros cargados
 	- Mostrar los registros cargados por curso
@@ -13,10 +13,10 @@ registros y realizar las siguientes consultas:
 	- Consultar el promedio de calificaciones en forma global	
 	- Consultar la lista de calificaciones por curso	
 	- Consultar la lista de calificaciones por materia	
-	- Decir cu·ntos aprobados y no aprobados existen por materia	<---- X
-ObservaciÛn:
-- Ning˙n registro puede estar repetido en la estructura (realizar validaciÛn)
-- Utilizar la funciÛn gotoxy para presentar los datos en forma de tablas
+	- Decir cu√°ntos aprobados y no aprobados existen por materia	<---- X
+Observaci√≥n:
+- Ning√∫n registro puede estar repetido en la estructura (realizar validaci√≥n)
+- Utilizar la funci√≥n gotoxy para presentar los datos en forma de tablas
 
 */
 #include <iostream>
@@ -35,7 +35,7 @@ struct Nodo{
 };
 
 struct Materias{
-	int c=0;
+	int c;
 	string materia1;
 	Materias* siguiente;
 };
@@ -78,7 +78,7 @@ main(){
 	char op;
 	int sw=1, id, cedula, curso, cal, menu, ops;
 	string nombre, apellido, materia;
-	Materias *Lmaterias=NULL;
+	Materias* Lmaterias = NULL;
 	Nodo *lista = NULL;
 	do{
 		system("cls");
@@ -156,6 +156,7 @@ main(){
 				system("cls");
 				cout<<"MENU 4 -> Eliminar Registro"<<endl;
 				cout<<"--------------------------------------------"<<endl;
+				encabezado();
 				mostrarLista(lista);
 				system("pause");
 				cout<<"ingrese el id del usuario que desea eliminar: ";
@@ -165,13 +166,13 @@ main(){
 				break;
 			case 5: 
 				system("cls");
-				cout<<"MENU 4 -> Mostrar Registros por Curso"<<endl;
+				cout<<"MENU 5 -> Mostrar Registros por Curso"<<endl;
 				cout<<"--------------------------------------------"<<endl;
 				registrosXcurso(lista);
 				break;
 			case 6: 
 				system("cls");
-				cout<<"MENU 5 -> Mostrar Registros por Materia"<<endl;
+				cout<<"MENU 6 -> Mostrar Registros por Materia"<<endl;
 				cout<<"--------------------------------------------"<<endl;
 				registrosXmateria(lista,Lmaterias);
 				
@@ -179,7 +180,7 @@ main(){
 			case 7: 
 				
 				system("cls");
-				cout<<"MENU 6 -> Mostrar Registros por Alumno"<<endl;
+				cout<<"MENU 7 -> Mostrar Registros por Alumno"<<endl;
 				cout<<"--------------------------------------------"<<endl;
 				cout<<"ingrese nombre del alumno: ";
 				nombre=leer_caracteres();
@@ -191,13 +192,13 @@ main(){
 				break;
 			case 8: 
 				system("cls");
-				cout<<"MENU 7 -> Mostrar Registros con calificaciones (1, 2, 3, 4, 5)"<<endl;
+				cout<<"MENU 8 -> Mostrar Registros con calificaciones (1, 2, 3, 4, 5)"<<endl;
 				cout<<"--------------------------------------------"<<endl;
 				mostrarCantidades(lista);
 				break;
 			case 9:
 				system("cls");
-				cout<<"MENU 8 -> Promedio de calificaciones por materia"<<endl;
+				cout<<"MENU 9 -> Promedio de calificaciones por materia"<<endl;
 				cout<<"--------------------------------------------"<<endl; 
 				cout<<"Ingrese la materia a consultar: ";
 				materia=leer_caracteres();
@@ -205,19 +206,19 @@ main(){
 				break;
 			case 10: 
 				system("cls");
-				cout<<"MENU 9 -> Promedio de calificaciones en forma global"<<endl;
+				cout<<"MENU 10 -> Promedio de calificaciones en forma global"<<endl;
 				cout<<"--------------------------------------------"<<endl;
 				promCalificacionesG(lista);
 				break;
 			case 11: 
 				system("cls");
-				cout<<"MENU 10 -> Lista de Calificaciones por Curso"<<endl;
+				cout<<"MENU 11 -> Lista de Calificaciones por Curso"<<endl;
 				cout<<"--------------------------------------------"<<endl;
 				calificacionesXcurso(lista);
 				break;
 			case 12: 
 				system("cls");
-				cout<<"MENU 11 -> Lista de Calificaciones por Materia"<<endl;
+				cout<<"MENU 12 -> Lista de Calificaciones por Materia"<<endl;
 				cout<<"--------------------------------------------"<<endl;
 				calificacionesXmateria(lista,Lmaterias);
 				
@@ -225,7 +226,7 @@ main(){
 				break;
 			case 13: 
 				system("cls");
-				cout<<"MENU 12 -> Cantidad de aprobados y no aprobados por materia"<<endl;
+				cout<<"MENU 13 -> Cantidad de aprobados y no aprobados por materia"<<endl;
 				cout<<"--------------------------------------------"<<endl;
 				aprobadosXmateria(lista,Lmaterias);
 				break;
@@ -424,7 +425,7 @@ void eliminarNodo(Nodo *&lista, int n){
 			cout<<"\n";
 		}		
 	}else{
-		cout<<"La lista est· vacÌa"<<endl;
+		cout<<"La lista est√° vac√≠a"<<endl;
 	}
 }
 void registrosXcurso(Nodo* lista){
@@ -433,8 +434,8 @@ void registrosXcurso(Nodo* lista){
 		int f=4;
 		for(int c=1;c<=5;c++){
 			actual=lista;
+			encabezado();
 			while(actual != NULL){
-				encabezado();
 				if(actual->curso==c){		
 					f++;
 					gotoxy(2,f);cout<<actual->id;
@@ -444,6 +445,7 @@ void registrosXcurso(Nodo* lista){
 					gotoxy(64,f);cout<<actual->curso;
 					gotoxy(72,f);cout<<actual->materia;
 					gotoxy(88,f);cout<<actual->calificacion;
+					cout<<endl;
 				}			
 				actual = actual->siguiente;
 			}
@@ -459,7 +461,6 @@ void registrosXcurso(Nodo* lista){
 	}
 }
 void registrosXmateria(Nodo* lista,Materias*& Lmaterias){
-	
 	Nodo *actual = lista;
 	if(actual != NULL){
 		if(Lmaterias == NULL){
@@ -472,27 +473,28 @@ void registrosXmateria(Nodo* lista,Materias*& Lmaterias){
 					}
 					cargarmateria(Lmaterias,actual->materia);
 				}
-				//actual = actual->siguiente;
+				actual = actual->siguiente;
 			}
-		}else{
-			Materias* aux=Lmaterias;
-			while(aux!=NULL){
-				actual=lista;
-				while(actual!=NULL){
-					if(aux->materia1.compare(actual->materia)==0){
-						aux->c=aux->c+1;
-					}
-					actual=actual->siguiente;
-				}	
-				aux=aux->siguiente;
-			}
-			aux=Lmaterias;
-			while(aux!=NULL){
-				cout<<"la cantidad de registros en la materia "<<aux->materia1<<" es: "<<aux->c<<endl;
-				aux=aux->siguiente;
-			}
-			system("pause");
 		}
+		Materias* aux=Lmaterias;
+		actual=lista;
+		while(aux!=NULL){
+			actual=lista;
+			while(actual!=NULL){
+				if(aux->materia1.compare(actual->materia)==0){
+					aux->c=aux->c+1;
+				}
+				actual=actual->siguiente;
+			}	
+			aux=aux->siguiente;
+		}
+		aux=Lmaterias;
+		while(aux!=NULL){
+			cout<<"la cantidad de registros en la materia "<<aux->materia1<<" es: "<<aux->c<<endl;
+			aux=aux->siguiente;
+		}
+		system("pause");
+		
 		
 	}else{
 		cout<<"Nno existe registros guardados"<<endl;
@@ -641,7 +643,7 @@ void calificacionesXcurso(Nodo* lista){
 void calificacionesXmateria(Nodo*lista ,Materias*& Lmaterias){
 	Nodo *actual = lista;
 	if(actual != NULL){
-		if(Lmaterias==NULL){
+		if(Lmaterias == NULL){
 			while(actual != NULL){
 				if(Lmaterias==NULL){
 					cargarmateria(Lmaterias,actual->materia);
@@ -651,9 +653,10 @@ void calificacionesXmateria(Nodo*lista ,Materias*& Lmaterias){
 					}
 					cargarmateria(Lmaterias,actual->materia);
 				}
-				//actual = actual->siguiente;
+				actual = actual->siguiente;
 			}
-		}else{
+		}
+		
 			Materias* aux=Lmaterias;
 			int f=4;
 			while(aux!=NULL){
@@ -680,7 +683,7 @@ void calificacionesXmateria(Nodo*lista ,Materias*& Lmaterias){
 				aux=aux->siguiente;
 			}
 			system("pause");
-		}
+		
 		
 	}else{
 		cout<<"Nno existe registros guardados"<<endl;
@@ -780,4 +783,3 @@ void modificarLista(Nodo *lista, int id){
 		cout<<"La lista se encuentra vacia"<<endl;
 	}	
 }
-
