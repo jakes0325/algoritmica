@@ -84,7 +84,7 @@ main(){
 		system("cls");
 		mostrarMenu();
 		cin>>menu;
-		while((menu<1)||(menu>13)){
+		while((menu<1)||(menu>14)){
 			system("cls");
 			cout<<" ERROR: el numero ingresado no se encuentra en el rango"<<endl;
 			cout<<" Vuelva a Intentar"<<endl;
@@ -140,10 +140,12 @@ main(){
 				system("cls");
 				cout<<" MENU 2 -> Modificar Registro"<<endl;
 				cout<<"--------------------------------------------"<<endl;
-				cout<<" Ingrese Codigo de Registro: ";
+				mostrarLista(lista);
+				cout<<" Ingrese ID de registro: ";
 				cin>>id;
 				modificarLista(lista, id);
 				cout<<endl;
+				system("pause");
 				break;
 			case 3: 
 				system("cls");
@@ -169,13 +171,13 @@ main(){
 				cout<<"MENU 5 -> Mostrar Registros por Curso"<<endl;
 				cout<<"--------------------------------------------"<<endl;
 				registrosXcurso(lista);
+				system("pause");
 				break;
 			case 6: 
 				system("cls");
 				cout<<"MENU 6 -> Mostrar Registros por Materia"<<endl;
 				cout<<"--------------------------------------------"<<endl;
 				registrosXmateria(lista,Lmaterias);
-				
 				break;
 			case 7: 
 				
@@ -188,13 +190,14 @@ main(){
 				apellido=leer_caracteres();
 				encabezado();
 				registrosXalumno(lista,nombre+apellido);
-				
+				system("pause");
 				break;
 			case 8: 
 				system("cls");
 				cout<<"MENU 8 -> Mostrar Registros con calificaciones (1, 2, 3, 4, 5)"<<endl;
 				cout<<"--------------------------------------------"<<endl;
 				mostrarCantidades(lista);
+				system("pause");
 				break;
 			case 9:
 				system("cls");
@@ -203,18 +206,21 @@ main(){
 				cout<<"Ingrese la materia a consultar: ";
 				materia=leer_caracteres();
 				buscarPromMateria(lista, materia);
+				system("pause");
 				break;
 			case 10: 
 				system("cls");
 				cout<<"MENU 10 -> Promedio de calificaciones en forma global"<<endl;
 				cout<<"--------------------------------------------"<<endl;
 				promCalificacionesG(lista);
+				system("pause");
 				break;
 			case 11: 
 				system("cls");
 				cout<<"MENU 11 -> Lista de Calificaciones por Curso"<<endl;
 				cout<<"--------------------------------------------"<<endl;
 				calificacionesXcurso(lista);
+				system("pause");
 				break;
 			case 12: 
 				system("cls");
@@ -229,6 +235,7 @@ main(){
 				cout<<"MENU 13 -> Cantidad de aprobados y no aprobados por materia"<<endl;
 				cout<<"--------------------------------------------"<<endl;
 				aprobadosXmateria(lista,Lmaterias);
+				system("pause");
 				break;
 			case 14: 
 				system("cls");
@@ -243,12 +250,14 @@ main(){
 					mensajeSalir();
 					cin>>ops;
 				}
-				if(ops==0){
+				if(ops==1){
 					sw=0;
 					system("cls");
 					cout<<" GRACIAS POR UTILIZAR ESTE PROGRAMA"<<endl;
 					cout<<" VUELVA PRONTO"<<endl;
+					
 				}
+				system("pause");
 				break;
 		}
 	}while(sw==1);
@@ -318,7 +327,7 @@ int leer_entero(){
 	while(!cin.good()){
 		cin.clear();
 		fflush(stdin);
-		cout<<"error. solo se permiten valores numericos\n";
+		cout<<"error. solo se permiten valores numericos\ningrese de nuevo: ";
 		cin>>a;
 	}
 	return a;
@@ -491,6 +500,7 @@ void registrosXmateria(Nodo* lista,Materias*& Lmaterias){
 		aux=Lmaterias;
 		while(aux!=NULL){
 			cout<<"la cantidad de registros en la materia "<<aux->materia1<<" es: "<<aux->c<<endl;
+			aux->c=0;
 			aux=aux->siguiente;
 		}
 		system("pause");
@@ -585,7 +595,7 @@ void buscarPromMateria(Nodo *lista, string materia){
 	Nodo *actual = lista;
 	if(actual != NULL){
 		while(actual != NULL){
-			if(materia.compare(actual->materia) != 0){
+			if(materia.compare(actual->materia) == 0){
 				sum = sum + actual->calificacion;
 				can++;	
 			}
@@ -667,24 +677,20 @@ void calificacionesXmateria(Nodo*lista ,Materias*& Lmaterias){
 					if(aux->materia1.compare(actual->materia)==0){
 						f++;
 						gotoxy(2,f);cout<<actual->id;
-						gotoxy(8,f);cout<<actual->curso;
-						gotoxy(20,f);cout<<actual->materia;
-						gotoxy(30,f);cout<<actual->calificacion;
+						gotoxy(14,f);cout<<actual->curso;
+						gotoxy(26,f);cout<<actual->materia;
+						gotoxy(45,f);cout<<actual->calificacion;
+						cout<<endl;
 					}
 					actual=actual->siguiente;
 				}	
 				aux=aux->siguiente;
 				f=4;
 				actual=lista;
+				system("pause");
+				system("cls");
 			}
-			aux=Lmaterias;
-			while(aux!=NULL){
-				cout<<"la cantidad de registros en la materia "<<aux->materia1<<" es: "<<aux->c<<endl;
-				aux=aux->siguiente;
-			}
-			system("pause");
-		
-		
+			
 	}else{
 		cout<<"Nno existe registros guardados"<<endl;
 	}
@@ -720,11 +726,6 @@ void aprobadosXmateria(Nodo* lista,Materias*& Lmaterias){
 				actual=lista;
 				aux=aux->siguiente;
 			}
-			aux=Lmaterias;
-			while(aux!=NULL){
-				cout<<"la cantidad de registros en la materia "<<aux->materia1<<" es: "<<aux->c<<endl;
-				aux=aux->siguiente;
-			}
 			system("pause");
 		}
 		
@@ -749,26 +750,26 @@ void modificarLista(Nodo *lista, int id){
 		}else{
 			cout<<"Ingrese los datos para modificar el registro"<<endl;
 			cout<<"Cedula: ";
-			cin>>cedula; fflush(stdin);
+			cedula=leer_entero();
 			cout<<"Nombre: ";
-			getline(cin,nombre); fflush(stdin);
+			nombre=leer_caracteres();
 			cout<<"Apellido: ";
-			getline(cin,apellido); fflush(stdin);
+			apellido=leer_caracteres();
 			cout<<"Curso: ";
-			cin>>curso; fflush(stdin);
+			curso=leer_entero();
 			while((curso<1)||(curso>5)){
 				cout<<"ERROR de curso, solo del 1 al 5"<<endl;
 				cout<<"Intente de nuevo: ";
-				cin>>curso; fflush(stdin);
+				curso=leer_entero();
 			}
 			cout<<"Materia: ";
-			getline(cin,materia); fflush(stdin);
+			materia=leer_caracteres();
 			cout<<"Calificacion: ";
-			cin>>cal;
+			cal=leer_entero();
 			while((cal<1)||(cal>5)){
 				cout<<"ERROR de calificacion, solo del 1 al 5"<<endl;
 				cout<<"Intente de nuevo: ";
-				cin>>cal;
+				cal=leer_entero();
 			}
 			
 			actual->cedula=cedula;
