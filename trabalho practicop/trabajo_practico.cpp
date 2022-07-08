@@ -1,24 +1,24 @@
 /*
-		Los empleados de una f·brica trabajan en dos turnos, Diurno y Nocturno. Crear un programa que
-	permita registrar el cÛdigo, nombre del funcionario, horas trabajadas, el turno y el dÌa (ìFestivoî,
-	ìLaborableî) y a su vez calcular el jornal diario a cobrar donde se tienen en cuenta los siguientes
+		Los empleados de una f√°brica trabajan en dos turnos, Diurno y Nocturno. Crear un programa que
+	permita registrar el c√≥digo, nombre del funcionario, horas trabajadas, el turno y el d√≠a (‚ÄúFestivo‚Äù,
+	‚ÄúLaborable‚Äù) y a su vez calcular el jornal diario a cobrar donde se tienen en cuenta los siguientes
 	puntos:
 	? La tarifa de las horas diurnas es de 100.000 Gs
 	? La tarifa de las horas nocturnas es de 135.000 Gs
 	? En caso de ser festivo, la tarifa se incrementa en un 10% en caso de turno diurno y en un
 	15% para el nocturno.
-	Adem·s, realizar el proceso de arreglo, que consistir· en filtrar todos los jornales pendientes de
+	Adem√°s, realizar el proceso de arreglo, que consistir√° en filtrar todos los jornales pendientes de
 	cualquier empleado seleccionado, mostrando el resumen y total a cobrar.
-	Realizar la implementaciÛn de la aplicaciÛn en una lista doblemente enlazada que contendr· todos
-	los datos mencionados anteriormente y utiliza el siguiente men˙ para la navegaciÛn e
-	implementaciÛn:
+	Realizar la implementaci√≥n de la aplicaci√≥n en una lista doblemente enlazada que contendr√° todos
+	los datos mencionados anteriormente y utiliza el siguiente men√∫ para la navegaci√≥n e
+	implementaci√≥n:
 	
 			MENU
 	1) Registrar Jornal.
 	2) Modificar Jornal.
 	3) Eliminar Jornal.
-	4) Consultar Jornal por cÛdigo de Funcionario.
-	5) Mostrar Lista de Primero al ⁄ltimo con un resumen totalizado.
+	4) Consultar Jornal por c√≥digo de Funcionario.
+	5) Mostrar Lista de Primero al √öltimo con un resumen totalizado.
 	6) Mostrar Lista de Ultimo al Primero con un resumen totalizado.
 	7) Mostrar el funcionario con mayor y menor jornal.
 	8) Realizar Arreglo (Cobrar Jornales).
@@ -30,17 +30,17 @@
 	14) Salir o Regresar.
 										OBSERVACIONES:
 	? Se recomienda crear una estructura exclusiva para los empleados, donde cada uno debe ser
-	identificado con un cÛdigo ID
+	identificado con un c√≥digo ID
 	? Un funcionario solo puornal eede recibir un Jn un turno determinado, en caso de repetir un
 	dato, el programa debe mostrar un error, especificando el inconveniente.
-	? Para consultar, modificar y eliminar se tendr· en cuenta el campo ìCÛdigo de Funcionarioî
-	para la b˙squeda, donde, el cÛdigo de funcionario debe ser un campo ˙nico e irrepetible.
+	? Para consultar, modificar y eliminar se tendr√° en cuenta el campo ‚ÄúC√≥digo de Funcionario‚Äù
+	para la b√∫squeda, donde, el c√≥digo de funcionario debe ser un campo √∫nico e irrepetible.
 	? El arreglo de jornal consiste en el pago de los jornales obtenidos por los empleados, es decir,
 	los alumnos con jornales pendientes.
 	? Se recomienda un campo que permita identificar a los registros de jornal como pendiente o
 	cobrado.
 	? El resumen totalizado es la sumatoria de todos los jornales calculados
-	? Considerar como dÌas festivos: s·bados, domingos y feriados 
+	? Considerar como d√≠as festivos: s√°bados, domingos y feriados 
 */
 #include<iostream>
 #include<windows.h>
@@ -403,7 +403,7 @@ void mostrarlista(nodo*primero){
 			gotoxy(44,f);cout<<aux->horas;
 			gotoxy(63,f);cout<<aux->turno;
 			gotoxy(85,f);cout<<aux->dia;
-			gotoxy(95,f);cout<<aux->jornal;
+			gotoxy(100,f);cout<<aux->jornal;
 			aux=aux->siguiente;
 			f++;
 		}
@@ -424,7 +424,7 @@ void mostrarlistaUP(nodo*ultimo){
 			gotoxy(44,f);cout<<aux->horas;
 			gotoxy(63,f);cout<<aux->turno;
 			gotoxy(85,f);cout<<aux->dia;
-			gotoxy(95,f);cout<<aux->jornal;
+			gotoxy(100,f);cout<<aux->jornal;
 			aux=aux->anterior;
 			f++;
 		}
@@ -676,7 +676,7 @@ void arreglo_de_jornales(nodo*&primero){
 				gotoxy(44,f);cout<<aux->horas;
 				gotoxy(63,f);cout<<aux->turno;
 				gotoxy(85,f);cout<<aux->dia;
-				gotoxy(95,f);cout<<aux->jornal;
+				gotoxy(100,f);cout<<aux->jornal;
 				f++;
 			}
 			aux=aux->siguiente;
@@ -871,6 +871,7 @@ string leer_caracter(){
 	string a;
 	int sw=0;
 	do{
+		sw=0;
 		fflush(stdin);
 		getline(cin,a);
 		for(int c=0;(c<a.length())&&(sw==0);c++){
@@ -884,7 +885,6 @@ string leer_caracter(){
 	
 	return a;
 }
-
 
 
 
